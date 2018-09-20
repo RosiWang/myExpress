@@ -22,9 +22,9 @@
         <td><%= datas[i].id %></td>
         <td><%= datas[i].age %></td>
         <td><%= datas[i].name %></td>
-        <td><a href="/users/add">添加用户</a></td>
-        <td><a href="/users/del/<%= datas[i].id %>">删除</a></td>
-        <td><a href="/users/toUpdate/<%= datas[i].id %>">修改</a></td>
+        <td><a href="/add">添加用户</a></td>
+        <td><a href="/del/:<%= datas[i].id %>">删除</a></td>
+        <td><a href="/update/:<%= datas[i].id %>">修改</a></td>
     </tr>
     <% } %>
 </table>
