@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require("../config/db");
-
+var formLen = 0;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -17,9 +17,11 @@ router.get("/users",function(req,res,next){
             res.render("users.ejs",{title:"用户列表",datas:[]});
         }else {
             res.render("users.ejs",{title:"用户列表",datas:rows});
+            formLen = rows.length;
         }
-        console.log("query666:",rows);
+        console.log("query666:",rows,rows.length);
     });
+
 });
 
 /**
@@ -33,7 +35,9 @@ router.get("/add",function(req,res,next){
 router.post("/users/add",function(req,res,next){
     var name = req.body.name;
     var age = req.body.age;
-    db.query("insert into user(name,age,id) values('"+name+"','"+ age +"','10')",function(err,rows){
+    //"insert into user(name,age,id) values('"+name+"','"+ age +"','10')"
+    const id = formLen+1;
+    db.query(`insert into user(name,age,id) values('${name}','${age}','${id}')`,function(err,rows){
         if(err){
             res.send("新增失败"+err);
         }else {
